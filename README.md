@@ -24,8 +24,6 @@
   </p>
 </div>
 
-
-
 ![screenshot](images/screenshot.png)
 
 <!-- ABOUT THE PROJECT -->
@@ -83,7 +81,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+This work is licensed under a GNU General Public License v3.0. See `LICENSE.md` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -92,7 +90,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Email us - baskerville-tier2-support@contacts.bham.ac.uk
+Email us: baskerville-tier2-support@contacts.bham.ac.uk
 
 Project Link: [https://github.com/baskerville-hpc/intro-to-hpc](https://github.com/baskerville-hpc/intro-to-hpc)
 
@@ -104,7 +102,10 @@ Project Link: [https://github.com/baskerville-hpc/intro-to-hpc](https://github.c
 ## Acknowledgments
 
 * [Jenny Wong](https://github.com/jnywong)
+* [Baskerville](https://github.com/baskerville-hpc)
 * [BEAR Research Software Group](https://github.com/bear-rsg)
+
+Baskerville is funded by the EPSRC and UKRI through the World Class Labs scheme (EP/T022221/1) and the Digital Research Infrastructure programme (EP/W032244/1).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
