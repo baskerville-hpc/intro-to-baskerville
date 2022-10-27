@@ -1,6 +1,8 @@
 # hello.py
+
 import socket
 import time
+
 node = socket.gethostname()
 ts1 = time.ctime()
 print(f'Hello from {node} at {ts1}')
