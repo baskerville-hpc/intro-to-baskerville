@@ -1,5 +1,6 @@
 # hello.py
 
+"""System module."""
 import socket
 import time
 
