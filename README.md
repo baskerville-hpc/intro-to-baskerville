@@ -104,6 +104,7 @@ Project Link: [https://github.com/baskerville-hpc/intro-to-hpc](https://github.c
 ## Acknowledgments
 
 * [Jenny Wong](https://github.com/jnywong)
+* [James Allsopp](https://github.com/JamesAllsopp)
 * [Baskerville](https://github.com/baskerville-hpc)
 * [BEAR Research Software Group](https://github.com/bear-rsg)
 
