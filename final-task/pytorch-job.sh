@@ -16,4 +16,4 @@ module load bask-apps/live
 module load PyTorch/1.10.0-foss-2021a-CUDA-11.3.1
 
 # Run code
-python pytorch-gpu.py
+python pytorch_gpu.py
