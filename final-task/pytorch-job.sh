@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --account yearwoog-baskerville
-#SBATCH --qos bham
+#SBATCH --account <myproject>
+#SBATCH --qos <myqos>
 #SBATCH --time 0-0:60:0
 #SBATCH --nodes 1
 #SBATCH --gpus 1
