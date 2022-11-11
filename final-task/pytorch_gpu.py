@@ -1,6 +1,7 @@
 # pytorch_gpu.py
 
-import torch
+"""PyTorch module."""
+import torch # pylint: disable=import-error
 
 use_cuda = torch.cuda.is_available()
 

@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --qos bham
-#SBATCH --account yearwoog-baskerville
+#SBATCH --qos <myqos>
+#SBATCH --account <myproject>
 #SBATCH --time 1:0:0
 
 module purge
