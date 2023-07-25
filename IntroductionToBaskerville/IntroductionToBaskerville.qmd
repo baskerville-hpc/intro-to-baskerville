@@ -1,0 +1,193 @@
+---
+title: "Introduction to Baskerville: Using Slurm"
+author: "James Allsopp and Baskerville Team"
+format:
+  revealjs:
+    incremental: false
+    theme: moon
+    footer: "Slurm walk-through"
+    logo: RSG.png
+    css: logo.css
+    fig-cap-location: margin
+    code-line-numbers: true
+    fontsize: 30px
+    width: 1500
+---
+## Slurm - Simple Linux Uniform Resource Manager
+
++ Used to stop and start non-interactive jobs
++ Log into a login node via SSH
++ Run scripts using **sbatch** command.
++ After a time in the queue, your job starts on a compute node
+
+All of your data and code is available on all nodes.
+
+## Simple Slurm script
+
+
+````{.bash code-line-numbers="|1|2-4|6-7|9-11"}
+#!/bin/bash
+#SBATCH --qos arc
+#SBATCH --account edmondac-rsg
+#SBATCH --time 1:0:0
+
+module purge
+module load baskerville
+
+echo -n "This script is running on "
+hostname
+sleep 10
+````
+
++ If you ever need to find your QoS and account, use the command <br/>
+&nbsp;**my_baskerville**<br/>
+while logged into a Baskerville SSH connection.
++ First seven lines rarely change if you're working on the same project.
++ If you want to comment the #SBATCH lines, change to ##SBATCH .....
++ No Bash commands before #SBATCH, except **#!/bin/bash**
+
+
+
+## Simple Slurm script
+
+````{.bash}
+#!/bin/bash
+#SBATCH --qos arc
+#SBATCH --account edmondac-rsg
+#SBATCH --time 1:0:0
+
+module purge
+module load baskerville
+
+echo -n "This script is running on "
+hostname
+sleep 10
+````
+
+You can run this script on a compute node using;
+
+&nbsp;**sbatch basicSlurm.sh**
+
+
+
+
+## Sbatch outout 
+
+Two output files produced, slurm-&lt;job id&gt;.out and slurm-&lt;job id&gt;.stats
+:::: {.columns}
+
+::: {.column width="50%"}
+
+:::
+
+::: {.column width="50%"}
+
+
+
+:::
+::::
+
+## Checking on a job
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
++ If you want to see how all of your jobs are doing
+
+&nbsp;**squeue -u &lt;user name&gt;**
+
++ If you want to see how one particular job is doing
+
+&nbsp;**squeue -j &lt;job id&gt;**
+:::
+::: {.column width="50%"}
+
+| Code |            |               |
+|------|------------|---------------|
+| PD   | Pending    | All good - waiting for resources before starting|
+| R    | Running    | All good - working away                          |
+| CG   | Completing | All good - finished but some processes still working|
+| C    | Completed  | All good - job successfully finished |
+| F    | Failed     |                                      |
+:::
+::::
+Put example of a status here
+
+
+## Oh no, I've started a job and need to stop it
+
+
+<br/>
+Jobs can be stopped at any time using
+
+&nbsp;**scancel -j &lt;job id&gt;**
+<br/>
+
+### Quick tip
+
+<br/>
+
+Store job id in a bash variable directly using:
+
+&nbsp;**job_id = $(sbatch --parsable &lt;slurm file&gt;)**
+<br/>
+
+## Change job name
+<br/>
+Job name is used throughout slurm, so change it to something more readable than the script name:
+
+````{.bash}
+#SBATCH --job-name "A more readable name"
+````
+
+## Change the hardware you want you job to run on
+<br/>
+Baskerville has two types of GPU,
+
++ A100-40 (default)
++ A100-80
+````{.bash}
+#SBATCH contraint=a100_80
+````
+
+## Change the number of nodes or GPUs
+<br/>
+````{.bash}
+#SBATCH --gpus-per-task 3
+#SBATCH --task-per-node 1
+#SBATCH --nodes 1
+````
+Documented in more detail in the [docs.baskerville.ac.uk](docs.baskerville.ac.uk)
+
+## Change location of the output files
+<br/>
+
+````{.bash}
+#SBATCH --output=./output_file/slurm-%A_%a.out
+````
+
+Default option for this is <br/>&nbsp;**slurm-%j.out**
+<br/>
+
+Full list of options at https://doc.hpc.iter.es/slurm/how_to_slurm_filenamepatterns
+
+## Slurm Arrays
+
+<br/>
+
+Run many jobs from one Slurm file
+
+````{.bash}
+#SBATCH --array=1-10%2
+````
+
+Adding this will run the script 10 times with 2 jobs running simultaneously 
+
+Need to use with environment variables to make it useful.
+
++ SLURM_JOB_ID          - Full job number for each array job
++ SLURM_ARRAY_JOB_ID    - Job id of the array itself
++ SLURM_ARRAY_TASK_ID   - Index of the job in the array, e.g. a value between 1 and 10 from above.
+
+To track these jobs use the **sacct -j &lt;Job id&gt;** command
